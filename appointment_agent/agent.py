@@ -2,7 +2,7 @@ from google.adk.agents import Agent
 from appointment_agent.prompts import location_confirmation_prompt, timeslot_confirmation_prompt, schedule_appointment_prompt, coordinator_prompt
 from appointment_agent.tools import get_appointment_timeslots, get_locations, save_location, save_timeslot, schedule_appointment
 
-MODEL = "gemini-2.0-flash"
+MODEL = "gemini-2.0-flash-001"
 
 
 location_confirmation = Agent(

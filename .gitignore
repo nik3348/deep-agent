@@ -41,3 +41,6 @@ logs/
 # Evaluation reports
 *.evalset.json
 *.evalset_result.json
+
+# Memory
+sessions.db
