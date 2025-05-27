@@ -1,4 +1,4 @@
-# Agent Carro
+# Deep Agent
 
 A Python-based agent system built with Poetry for dependency management.
 
@@ -68,7 +68,7 @@ gcloud run deploy $SERVICE_NAME \
 --region $GOOGLE_CLOUD_LOCATION \
 --project $GOOGLE_CLOUD_PROJECT \
 --allow-unauthenticated \
---set-env-vars="GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT,GOOGLE_CLOUD_LOCATION=global,GOOGLE_GENAI_USE_VERTEXAI=TRUE,CARRO_API_KEY=$CARRO_API_KEY"
+--set-env-vars="GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT,GOOGLE_CLOUD_LOCATION=global,GOOGLE_GENAI_USE_VERTEXAI=TRUE,_API_KEY=$_API_KEY"
 # Add any other necessary environment variables your agent might need
 ```
 

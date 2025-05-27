@@ -2,18 +2,18 @@ import os
 import requests
 from google.adk.tools.tool_context import ToolContext
 
-CARRO_API_KEY = os.getenv('CARRO_API_KEY')
+API_KEY = os.getenv('API_KEY')
 
 
 def get_appointment_options() -> dict:
     """
-    Fetches available appointment options from the Carro API.
+    Fetches available appointment options from the API.
     Returns a dictionary containing the appointment options.
     """
-    url = 'https://api.carro.bot/actions/staging-cx/my/v1/appointment/options'
+    url = 'https://api.bot/actions/staging-cx/my/v1/appointment/options'
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': CARRO_API_KEY
+        'Authorization': API_KEY
     }
 
     try:
@@ -26,7 +26,7 @@ def get_appointment_options() -> dict:
 
 def get_appointment_timeslots(location_id: str) -> dict:
     """
-    Fetches available appointment timeslots from the Carro API.
+    Fetches available appointment timeslots from the API.
 
     Args:
         env (str): Environment (e.g., 'staging-cx')
@@ -37,10 +37,10 @@ def get_appointment_timeslots(location_id: str) -> dict:
     Returns:
         dict: Dictionary containing the available timeslots or error message
     """
-    url = f'https://api.carro.bot/actions/staging-cx/my/v1/appointment/options/timeslots/{location_id}/inspection'
+    url = f'https://api.bot/actions/staging-cx/my/v1/appointment/options/timeslots/{location_id}/inspection'
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': CARRO_API_KEY
+        'Authorization': API_KEY
     }
 
     try:
@@ -51,11 +51,12 @@ def get_appointment_timeslots(location_id: str) -> dict:
         return {"error": str(e)}
 
 
-def schedule_appointment(location_id: str, start_time: str, time_slot: str) -> dict:
+def schedule_appointment(ticket_id: int, location_id: str, start_time: str, time_slot: str) -> dict:
     """
-    Schedules an appointment using the Carro API.
+    Schedules an appointment using the API.
 
     Args:
+        ticket_id (int): The ID of the ticket to schedule the appointment for
         location_id (str): The ID of the selected location from state key 'selected_location'
         start_time (str): The start time of the appointment from state key 'selected_timeslot' in format 'YYYY-MM-DD HH:MM:SS' (e.g., '2025-05-28 16:00:00')
         time_slot (str): The selected time slot from state key 'selected_timeslot' in format 'HH:MM' (e.g., '08:00')
@@ -63,13 +64,13 @@ def schedule_appointment(location_id: str, start_time: str, time_slot: str) -> d
     Returns:
         dict: Response from the API or error message
     """
-    url = 'https://api.carro.bot/actions/staging-cx/my/v1/appointment'
+    url = 'https://api.bot/actions/staging-cx/my/v1/appointment'
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': CARRO_API_KEY
+        'Authorization': API_KEY
     }
     payload = {
-        'ticket_id': 2428259,
+        'ticket_id': ticket_id,
         'location_id': location_id,
         'start_time': start_time,
         'time_slot': time_slot,
@@ -126,14 +127,14 @@ def save_timeslot(selected_timeslot: str, tool_context: ToolContext) -> dict:
 
 def get_locations() -> dict:
     """
-    Fetches available locations from the Carro API.
+    Fetches available locations from the API.
     Returns a dictionary containing only the abbreviation, address, and id for each location.
     """
-    url = 'https://api.carro.bot/captain-api/staging-cx/my/v1/locations'
+    url = 'https://api.bot/captain-api/staging-cx/my/v1/locations'
     headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': CARRO_API_KEY
+        'Authorization': API_KEY
     }
 
     try:
